@@ -38,10 +38,10 @@ class ClientResponse:
         return self._decode(await self.content.read(sz))
 
     async def text(self, encoding="utf-8"):
-        return (await self.read(int(self.headers.get("Content-Length", -1)))).decode(encoding)
+        return (await self.read(sz=int(self.headers.get("Content-Length", -1)))).decode(encoding)
 
     async def json(self):
-        return _json.loads(await self.read(int(self.headers.get("Content-Length", -1))))
+        return _json.loads(await self.read(sz=int(self.headers.get("Content-Length", -1))))
 
     def __repr__(self):
         return "<ClientResponse %d %s>" % (self.status, self.headers)
